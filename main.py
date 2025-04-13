@@ -11,8 +11,9 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173",
-    "https://symphonious-bombolone-c96681.netlify.app/",
+    "https://symphonious-bombolone-c96681.netlify.app",  # ✅ Remove trailing slash
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
