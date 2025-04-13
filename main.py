@@ -13,7 +13,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = [
-    "https://symphonious-bombolone-c96681.netlify.app",  # Your frontend URL
+    "https://cerulean-semolina-b03de8.netlify.app/",  # Your frontend URL
     "http://localhost:5173",  # For local dev
 ]
 
