@@ -7,17 +7,21 @@ from database import engine, SessionLocal, Base
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+
 
 origins = [
     "http://localhost:5173",
-    "https://symphonious-bombolone-c96681.netlify.app",  # ✅ Remove trailing slash
+    "https://symphonious-bombolone-c96681.netlify.app",  # ✅ NO trailing slash!
 ]
 
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # ✅ correctly using defined origins
+    allow_origins=[
+        "http://localhost:5173",
+        "https://symphonious-bombolone-c96681.netlify.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
