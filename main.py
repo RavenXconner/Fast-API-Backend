@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+
 import models, schemas, crud
 from database import engine, SessionLocal, Base
-
-from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(bind=engine)
 
@@ -16,7 +16,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,  # ✅ correctly using defined origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,6 +42,7 @@ def read_task(task_id: int, db: Session = Depends(get_db)):
 
 @app.post("/api/tasks/", response_model=schemas.Task)
 def create_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
+    print("Received task:", task)  # ✅ debug line
     return crud.create_task(db, task)
 
 @app.put("/api/tasks/{task_id}", response_model=schemas.Task)
