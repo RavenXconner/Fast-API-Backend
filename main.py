@@ -12,12 +12,15 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+
 origins = [
     "https://cerulean-semolina-b03de8.netlify.app",  # ✅ Corrected
     "http://localhost:5173",
+    
 ]
 app.add_middleware(
     CORSMiddleware,
+    allow_origins = ["https://cerulean-semolina-b03de8.netlify.app"],
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
