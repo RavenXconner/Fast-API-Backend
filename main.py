@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
+
 import models, schemas, crud
 from database import engine, SessionLocal, Base
 
@@ -9,19 +10,16 @@ Base.metadata.create_all(bind=engine)
 
 
 
-origins = [
-    "http://localhost:5173",
-    "https://symphonious-bombolone-c96681.netlify.app",  # ✅ NO trailing slash!
-]
-
 app = FastAPI()
+
+origins = [
+    "https://symphonious-bombolone-c96681.netlify.app",  # Your frontend URL
+    "http://localhost:5173",  # For local dev
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://symphonious-bombolone-c96681.netlify.app"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
