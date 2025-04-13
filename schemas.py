@@ -1,19 +1,22 @@
 from pydantic import BaseModel
 
+# Base model with consistent naming for both frontend and backend
 class TaskBase(BaseModel):
-    title: str
+    text: str
     completed: bool = False
 
-class TaskCreate(TaskBase):
-    pass
+# For POST /api/tasks/
+class TaskCreate(BaseModel):
+    text: str  # Only `text` is expected on creation
 
+# For PATCH / PUT updates
 class TaskUpdate(BaseModel):
-    title: str | None = None
+    text: str | None = None
     completed: bool | None = None
 
+# Final Task schema returned by the API
 class Task(TaskBase):
     id: int
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True  # Enables ORM mode for SQLAlchemy compatibility
