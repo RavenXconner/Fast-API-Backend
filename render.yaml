@@ -1,13 +1,11 @@
 services:
   - type: web
-    name: todo-backend
+    name: Fast-API-Backend
     runtime: python
     region: oregon
+    plan: free
     buildCommand: "pip install -r requirements.txt"
     startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 8000"
-    plan: free
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: your-postgres-db-name
-          property: connectionString
+        value: YOUR_FULL_DATABASE_URL_HERE
