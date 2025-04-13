@@ -11,7 +11,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173",
-    "https://rodillon-todo-reactvite.netlify.app/",
+    "https://symphonious-bombolone-c96681.netlify.app/",
 ]
 
 app.add_middleware(
