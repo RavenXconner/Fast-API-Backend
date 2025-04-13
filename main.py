@@ -13,10 +13,9 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = [
-    "https://cerulean-semolina-b03de8.netlify.app/",  # Your frontend URL
-    "http://localhost:5173",  # For local dev
+    "https://cerulean-semolina-b03de8.netlify.app",  # ✅ Corrected
+    "http://localhost:5173",
 ]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
